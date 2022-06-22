@@ -5,97 +5,37 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Page Builder | Page Maker</title>
-    <link rel="stylesheet" href="//unpkg.com/grapesjs/dist/css/grapes.min.css">
+    <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet">
+    <link href="{{ asset('grapesjs/dist/grapesjs-preset-webpage.min.css') }}" rel="stylesheet">
     <style>
-        body, html {
-            margin: 0;
+        body,
+        html {
             height: 100%;
+            margin: 0;
         }
     </style>
 </head>
 <body>
-<div id="editor">
-    <div style="padding: 25px">Hello World!!!</div>
-</div>
-<script src="//unpkg.com/grapesjs"></script>
+<div id="editor"></div>
 <script type="text/javascript">
-    const editor = grapesjs.init({
-        container: '#editor',
-        fromElement: 1,
-        height: '100%',
-        storageManager: { type: 0 },
-        plugins: ['gjs-preset-webpage']
-    });
-
-    // Add blocks
-    
-    editor.DomComponents.addType('input', {
-        isComponent: el => el.tagName == 'INPUT',
-        model: {
-            defaults: {
-                traits: [
-                    // Strings are automatically converted to text types
-                    'name', // Same as: { type: 'text', name: 'name' }
-                    'placeholder',
-                    'value',
-                    {
-                        type: 'select', // Type of the trait
-                        label: 'Type', // The label you will see in Settings
-                        name: 'type', // The name of the attribute/property to use on component
-                        options: [
-                            { id: 'text', name: 'Text'},
-                            { id: 'email', name: 'Email'},
-                            { id: 'password', name: 'Password'},
-                            { id: 'number', name: 'Number'},
-                        ]
-                    }, {
-                        type: 'checkbox',
-                        name: 'required',
-                    }],
-                // As by default, traits are binded to attributes, so to define
-                // their initial value we can use attributes
-                attributes: { type: 'text', required: true },
-            },
-        },
-    });
-
-    // Add the custom component
-    editor.DomComponents.addType('collection', {
-        model: {
-            defaults: {
-                category: 'SET-1',
-            },
-            // Customize the export HTML
-            toHTML() {
-                const category = this.get('category');
-                return `<div>{ VAR-TO-REPLACE-${category} }</div>`
-            },
-        },
-        view: {
-            onRender() {
-                const { $el, model } = this;
-                const category = model.get('category');
-                $el.empty();
-                // eg. you can make some ajax request and then...
-                const products = [
-                    '<div>Product 1</div>',
-                    '<div>Product 2</div>',
-                    '<div>Product 3</div>',
-                ];
-                products.forEach(product => {
-                    // If you append to the element, products will be static
-                    // and you won't be able to select/edit them.
-                    // So this approach is to use when you want kind
-                    // of placeholders elements.
-                    $el.append(product);
-
-                    // If actually need to select/edit them, append the HTML
-                    // to the model
-                    // model.append(product);
-                });
-            }
-        }
-    })
+    const type_page ='';
+    var urlStore = "{{ route('builder.storage', $page) }}";
+    var urlLoad = "{{ route('builder.storage', $page) }}";
+    var upload_Image = "{{ route('builder.storage', $page) }}";
+    var url_default_css_template = '//landingfago.top/modules/landingpage/css/template.css';
+    var back_button_url = "{{ route('welcome') }}";
+    var publish_button_url = "{{ route('welcome') }}";
+    var url_delete_image = "{{ route('builder.storage', $page) }}";
+    var url_search_icon = "{{ route('builder.storage', $page) }}";
+    var _token = '{{ csrf_token() }}';
+    var images_url = ["{{ asset('img/storage/certificate.png') }}"];
+    var blockscss = "";
+    var blocks = [];
 </script>
+<script src="//feather.aviary.com/imaging/v3/editor.js"></script>
+<script src="https://static.filestackapi.com/v3/filestack-0.1.10.js"></script>
+<script src="https://unpkg.com/grapesjs"></script>
+<script src="{{ asset('grapesjs/dist/grapesjs-preset-webpage.min.js') }}"></script>
+<script src="{{ asset('grapesjs/customization.js') }}" type="text/javascript"></script>
 </body>
 </html>

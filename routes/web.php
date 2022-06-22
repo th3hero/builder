@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
-Route::get('editor', [BuilderController::class, 'EditorFunction'])->name('editor');
+Route::any('editor/{page}', [BuilderController::class, 'EditorFunction'])->name('editor');
+Route::any('builder/{page}', [BuilderController::class, 'BuilderControl'])->name('builder.storage');
