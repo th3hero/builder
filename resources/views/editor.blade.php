@@ -17,6 +17,7 @@
 </head>
 <body>
 <div id="editor"></div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
     const type_page ='';
     var urlStore = "{{ route('builder.storage', $page) }}";
@@ -31,6 +32,7 @@
     var images_url = ["{{ asset('img/storage/certificate.png') }}"];
     var blockscss = "";
     var blocks = [];
+    var pageNumber = "{{ $page }}";
 </script>
 <script src="//feather.aviary.com/imaging/v3/editor.js"></script>
 <script src="https://static.filestackapi.com/v3/filestack-0.1.10.js"></script>

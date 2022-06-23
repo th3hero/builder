@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::any('editor/{page}', [BuilderController::class, 'EditorFunction'])->name('editor');
 Route::any('builder/{page}', [BuilderController::class, 'BuilderControl'])->name('builder.storage');
+Route::any('test/editor', [BuilderController::class, 'TestingBuilder']);

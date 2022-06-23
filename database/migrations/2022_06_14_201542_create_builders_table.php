@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->unsignedBigInteger('funnel_id')->nullable();
             $table->longText('html')->nullable();
             $table->longText('css')->nullable();
             $table->longText('js')->nullable();
